@@ -12,6 +12,14 @@ Behold My Awesome Project!
 
 :License: GPLv3
 
+Project Preview
+===============
+
+![Langing Page](./assets/preview.png)
+
+![students and Professor Login...](./assets/users.png)
+
+
 Settings
 --------
 
