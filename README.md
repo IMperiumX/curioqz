@@ -14,9 +14,9 @@ License
 Project Preview
 ===============
 
-!\[Langing Page\](./assets/preview.png)
+![Langing Page](./assets/landing.png)
 
-!\[students and Professor Login\...\](./assets/users.png)
+![students and Professor Login](./assets/users.png)
 
 Settings
 --------
