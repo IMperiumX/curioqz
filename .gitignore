@@ -335,4 +335,4 @@ quiz/media/
 .envs/*
 !.envs/.local/
 .assets
-
+Assets.zip
