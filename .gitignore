@@ -334,3 +334,5 @@ quiz/media/
 .env
 .envs/*
 !.envs/.local/
+.assets
+
