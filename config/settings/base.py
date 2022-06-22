@@ -313,3 +313,6 @@ REST_FRAMEWORK = {
 CORS_URLS_REGEX = r"^/api/.*$"
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+# Fix Deprication Warninings
+DEFAULT_AUTO_FIELD = "django.db.models.fields.AutoField"
