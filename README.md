@@ -1,7 +1,7 @@
 quiz
 ====
 
-Behold My Awesome Project!
+e-learning platform with its own content management system (CMS).
 
 [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/pydanny/cookiecutter-django/)
 
