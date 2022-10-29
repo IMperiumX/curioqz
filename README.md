@@ -1,4 +1,4 @@
-quiz
+Curioqz
 ====
 
 A Quiz Management application aims at the Employee assessment programs carried out in the organization by conducting Quizzes. The application focuses on creating a well defined exam/quiz for individual departments.
