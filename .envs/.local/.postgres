@@ -2,6 +2,6 @@
 # ------------------------------------------------------------------------------
 POSTGRES_HOST=postgres
 POSTGRES_PORT=5432
-POSTGRES_DB=quiz
-POSTGRES_USER=zHOQjbtmZastYSnwQMuGxTGphuavVMjy
-POSTGRES_PASSWORD=YJIltL9elwXmUpYo8P9V7HtXidaBtjOow3BtXOPSmbvU7aYYIfpsBM4OUspKxcwS
+POSTGRES_DB=curioqz
+POSTGRES_USER=bdgmdJTrCwZJbXkGwxRwVzJvAHOkTVwz
+POSTGRES_PASSWORD=nmq2GXICvmOr7BMXPQme9N2uH3iKnYqEdiROlnNxod3MvZZcGlXUllTwlRnRgROK

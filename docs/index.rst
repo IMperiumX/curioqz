@@ -1,9 +1,9 @@
-.. quiz documentation master file, created by
+.. curioqz documentation master file, created by
    sphinx-quickstart.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to quiz's documentation!
+Welcome to curioqz's documentation!
 ======================================================================
 
 .. toctree::
@@ -11,7 +11,6 @@ Welcome to quiz's documentation!
    :caption: Contents:
 
    howto
-   pycharm/configuration
    users
 
 

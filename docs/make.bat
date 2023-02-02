@@ -10,7 +10,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=_source
 set BUILDDIR=_build
-set APP=..\quiz
+set APP=..\curioqz
 
 if "%1" == "" goto help
 
@@ -32,7 +32,7 @@ if errorlevel 9009 (
 goto end
 
 :livehtml
-sphinx-autobuild -b html --open-browser -p 7000 --watch %APP% -c . %SOURCEDIR% %BUILDDIR%/html
+sphinx-autobuild -b html --open-browser -p 9000 --watch %APP% -c . %SOURCEDIR% %BUILDDIR%/html
 GOTO :EOF
 
 :apidocs
