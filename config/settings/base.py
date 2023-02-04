@@ -78,6 +78,8 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "curioqz.users",
     "curioqz.quizes",
+    "curioqz.courses",
+    "curioqz.questions",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
