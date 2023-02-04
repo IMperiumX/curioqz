@@ -13,7 +13,7 @@ class Question(models.Model):
     title = models.CharField(max_length=255)
     text = models.CharField(max_length=255)
     image = models.ImageField(upload_to="images/", blank=True, null=True)
-    type = models.CharField(max_length=13, choices=QuestionChoices.choices)
+    type = models.CharField(max_length=20, choices=QuestionChoices.choices)
     created = models.DateTimeField(auto_now_add=True)
     hidden = models.BooleanField(default=False)
 
@@ -23,11 +23,6 @@ class Question(models.Model):
         related_name="questions",
     )
 
-    quiz = models.ForeignKey(
-        "Quiz",
-        on_delete=models.CASCADE,
-        related_name="questions",
-    )
     category = models.ForeignKey(
         "Category",
         on_delete=models.CASCADE,

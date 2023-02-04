@@ -2,5 +2,10 @@ from django.apps import AppConfig
 
 
 class QuestionsConfig(AppConfig):
-    default_auto_field = "django.db.models.BigAutoField"
-    name = "questions"
+    name = "curioqz.questions"
+
+    def ready(self):
+        try:
+            import curioqz.questions.signals  # noqa F401
+        except ImportError:
+            pass
