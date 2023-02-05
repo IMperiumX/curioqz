@@ -10,8 +10,10 @@ from curioqz.quizes.models import Attempt, Grade, Quiz, QuizGrade, QuizQuestion,
 @pysnooper.snoop()
 class QuizViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = (
-        Quiz.objects.all()
-    )  # FIXME: Nested seriazlizer can fuck up your performance.
+        Quiz.objects.select_related("course", "course__owner", "review")
+        .prefetch_related("course__modules")
+        .all()
+    )
     serializer_class = QuizSerializer
 
     def create(self, request, *args, **kwargs):
