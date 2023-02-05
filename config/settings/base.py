@@ -294,7 +294,7 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "curioqz API",
     "DESCRIPTION": "Documentation of API endpoints of curioqz",
     "VERSION": "1.0.0",
-    "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
+    "SERVE_PERMISSIONS": ["rest_framework.permissions.AllowAny"],
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
