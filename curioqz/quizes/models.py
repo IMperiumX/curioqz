@@ -4,10 +4,13 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from curioqz.quizes.managers import QuizManager
+from curioqz.quizes.models_mixins import QuizMixin
+
 User = get_user_model()
 
 
-class Quiz(models.Model):
+class Quiz(QuizMixin, models.Model):
     class QuizChoices(models.TextChoices):
         EASY = "easy", "easy"
         MEDIUM = "medium", "medium"
@@ -44,6 +47,8 @@ class Quiz(models.Model):
 
     course = models.ForeignKey("courses.Course", on_delete=models.CASCADE)
     review = models.ForeignKey("Review", on_delete=models.CASCADE)
+
+    objects = QuizManager()
 
     class Meta:
         verbose_name_plural = _("quizes")
