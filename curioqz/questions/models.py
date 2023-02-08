@@ -65,7 +65,7 @@ class Answer(models.Model):
     feedback = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"question: {self.question.text}, answer: {self.text}, correct: {self.correct}"
+        return f"answer: {self.text}, correct: {self.correct}"
 
 
 class Cagtegory(models.Model):

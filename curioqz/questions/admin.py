@@ -29,7 +29,10 @@ class QuestionAdmin(admin.ModelAdmin):
         "category",
     )
     list_filter = ("created", "hidden", "created_by", "category")
-    raw_id_fields = ("answers",)
+    filter_horizontal = ("answers",)
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related("category", "created_by")
 
 
 @admin.register(Category)
@@ -43,6 +46,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ("id", "text", "correct", "created", "feedback")
     list_filter = ("correct", "created")
+    search_fields = ("text",)
 
 
 @admin.register(Cagtegory)
