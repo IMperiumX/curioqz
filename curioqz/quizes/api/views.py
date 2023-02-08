@@ -3,7 +3,11 @@ from rest_framework import generics, mixins, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from curioqz.quizes.api.serializers import QuizGradeSerializer, QuizSerializer
+from curioqz.quizes.api.serializers import (
+    QuizGradeSerializer,
+    QuizQuestionSerializer,
+    QuizSerializer,
+)
 from curioqz.quizes.models import Attempt, Grade, Quiz, QuizGrade, QuizQuestion, Review
 
 
@@ -28,6 +32,11 @@ class QuizViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         name="Fuck",
     )
     def yusuf_was_here(self, request, *args, **kwargs):
+        """
+        The latest DRF includes self.request in the default context sent to serializers;
+        you don't need to manually add it in.
+        previosly it was: self.context['request'].user
+        """
         from pprint import pprint
 
         print(args, kwargs)
@@ -53,3 +62,12 @@ class QuizViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 class QuizGradeViewSet(viewsets.ModelViewSet):
     queryset = QuizGrade.objects.all()
     serializer_class = QuizGradeSerializer
+
+
+class QuizQuestionViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = (
+        QuizQuestion.objects.select_related("quiz")
+        .prefetch_related("quiz__course__modules")
+        .all()
+    )
+    serializer_class = QuizQuestionSerializer

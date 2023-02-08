@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from curioqz.quizes.managers import QuizManager
+from curioqz.quizes.managers import QuizManager, QuizQuestionsManager
 from curioqz.quizes.models_mixins import QuizMixin
 
 User = get_user_model()
@@ -77,7 +77,7 @@ class Review(models.Model):
 
 
 class Attempt(models.Model):
-    slug = models.SlugField(default=uuid4, unique=True)
+    slug = models.SlugField(default=uuid4(), unique=True)
 
     start = models.DateTimeField(auto_now=True)
     finish = models.DateTimeField(auto_now=True)
@@ -133,6 +133,8 @@ class QuizQuestion(models.Model):
         on_delete=models.CASCADE,
         related_name="quiz_questions",
     )
+
+    objects = QuizQuestionsManager()
 
 
 # TODO: add quiz reports
