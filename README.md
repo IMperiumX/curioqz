@@ -13,7 +13,7 @@ Moved to [settings](https://cookiecutter-django.readthedocs.io/en/latest/1-getti
 
 ## Architecture
 
-![Architecture](https://github.com/IMperiumX/logos/blob/main/quizfy/quizify_architecture.png?raw=true)
+![Architecture](https://github.com/IMperiumX/logos/blob/main/quizify/quizify_architecture.png?raw=true)
 
 ## Features
 
