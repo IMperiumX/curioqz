@@ -2,12 +2,11 @@
 
 -r base.txt
 
-gunicorn
-psycopg2
-Collectfast
-sentry-sdk
+gunicorn==23.0.0  # https://github.com/benoitc/gunicorn
+psycopg[c]==3.2.3  # https://github.com/psycopg/psycopg
+Collectfasta==3.2.1  # https://github.com/jasongi/collectfasta
 
 # Django
 # ------------------------------------------------------------------------------
-django-storages[boto3]
-django-anymail[mailgun]
+django-storages[s3]==1.14.4  # https://github.com/jschneier/django-storages
+django-anymail[mailgun]==12.0  # https://github.com/anymail/django-anymail

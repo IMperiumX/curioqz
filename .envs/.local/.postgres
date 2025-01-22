@@ -1,7 +1,0 @@
-# PostgreSQL
-# ------------------------------------------------------------------------------
-POSTGRES_HOST=postgres
-POSTGRES_PORT=5432
-POSTGRES_DB=curioqz
-POSTGRES_USER=bdgmdJTrCwZJbXkGwxRwVzJvAHOkTVwz
-POSTGRES_PASSWORD=nmq2GXICvmOr7BMXPQme9N2uH3iKnYqEdiROlnNxod3MvZZcGlXUllTwlRnRgROK
