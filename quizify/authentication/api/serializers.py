@@ -1,5 +1,3 @@
-import contextlib
-
 from django.utils import timezone
 from rest_framework import serializers
 
@@ -8,7 +6,7 @@ from quizify.users.models import User
 
 
 class BearerTokenSerializer(serializers.Serializer):
-    email = serializers.CharField(allow_null=True, required=True, write_only=True)
+    email = serializers.EmailField(allow_null=True, required=True, write_only=True)
     password = serializers.CharField(
         write_only=True,
         allow_null=True,
