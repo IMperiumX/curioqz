@@ -94,6 +94,8 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "quizify.users",
     # Your stuff: custom apps go here
+    "quizify.authentication",
+    "quizify.common",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -336,8 +338,7 @@ SOCIALACCOUNT_FORMS = {"signup": "quizify.users.forms.UserSocialSignupForm"}
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.TokenAuthentication",
+        "quizify.authentication.backend.AccessTokenAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
@@ -352,8 +353,24 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "quizify API",
     "DESCRIPTION": "Documentation of API endpoints of quizify",
     "VERSION": "1.0.0",
-    "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
+    "SERVE_PERMISSIONS": ["rest_framework.permissions.AllowAny"],
     "SCHEMA_PATH_PREFIX": "/api/",
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+CACHE_LOGIN_PASSWORD_ENABLED = False
+
+SECURITY_LOGIN_LIMIT_COUNT = 20
+SECURITY_LOGIN_LIMIT_TIME = 30
+SECURITY_LOGIN_IP_BLACK_LIST = []
+SECURITY_LOGIN_IP_WHITE_LIST = []
+SECURITY_LOGIN_IP_LIMIT_COUNT = 99999
+SECURITY_LOGIN_IP_LIMIT_TIME = 30
+
+ONLY_ALLOW_EXIST_USER_AUTH = False
+
+SECURITY_PASSWORD_EXPIRATION_TIME = 9999
+
+TOKEN_EXPIRATION = 3600 * 24
+DEFAULT_EXPIRED_YEARS = 70
