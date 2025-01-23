@@ -4,11 +4,15 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include
 from django.urls import path
+from django.urls import re_path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView
 from drf_spectacular.views import SpectacularSwaggerView
+from oauth2_provider import urls as oauth2_urls
 from rest_framework.authtoken.views import obtain_auth_token
+from allauth.account.views import confirm_email
+from allauth.account.views import email_verification_sent
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
@@ -23,15 +27,28 @@ urlpatterns = [
     path("users/", include("quizify.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    # ...
+    path("o/", include(oauth2_urls)),
     # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
+
 
 # API URLS
 urlpatterns += [
     # API base url
     path("api/", include("config.api_router")),
+    path("api/auth/", include("dj_rest_auth.urls")),
+    path("api/auth/registration/", include("dj_rest_auth.registration.urls")),
+    re_path(
+        r"^confirm-email/(?P<key>[-:\w]+)/$",
+        confirm_email,
+        name="account_confirm_email",
+    ),
+    path(
+        "confirm-email/",
+        email_verification_sent,
+        name="account_email_verification_sent",
+    ),
     # DRF auth token
     path("api/auth-token/", obtain_auth_token),
     path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),
