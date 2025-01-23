@@ -89,6 +89,11 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "drf_spectacular",
+    "oauth2_provider",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
+    # ...
+    "allauth.socialaccount.providers.facebook",
 ]
 
 LOCAL_APPS = [
@@ -109,7 +114,6 @@ MIGRATION_MODULES = {"sites": "quizify.contrib.sites.migrations"}
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#authentication-backends
 AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
@@ -332,6 +336,7 @@ ACCOUNT_FORMS = {"signup": "quizify.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "quizify.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_FORMS = {"signup": "quizify.users.forms.UserSocialSignupForm"}
+GITHUB_CALLBACK_URL = ""
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
@@ -339,6 +344,8 @@ SOCIALACCOUNT_FORMS = {"signup": "quizify.users.forms.UserSocialSignupForm"}
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "quizify.authentication.backend.AccessTokenAuthentication",
+        # "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
     ),
@@ -376,3 +383,11 @@ SECURITY_PASSWORD_EXPIRATION_TIME = 9999
 
 TOKEN_EXPIRATION = 3600 * 24
 DEFAULT_EXPIRED_YEARS = 70
+
+
+# dj-rest-auth https://github.com/iMerica/dj-rest-auth
+REST_AUTH = {
+    "USE_JWT": True,
+    "JWT_AUTH_COOKIE": "quizify-auth",
+    "JWT_AUTH_REFRESH_COOKIE": "quizify-refresh-token",
+}
