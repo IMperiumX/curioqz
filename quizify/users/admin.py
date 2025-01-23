@@ -34,9 +34,23 @@ class UserAdmin(auth_admin.UserAdmin):
                 ),
             },
         ),
-        (_("Important dates"), {"fields": ("last_login", "date_joined")}),
+        (
+            _("Important dates"),
+            {
+                "fields": (
+                    "last_login",
+                    "date_joined",
+                    "date_password_last_updated",
+                    "date_api_key_last_used",
+                ),
+            },
+        ),
     )
     list_display = ["email", "name", "is_superuser"]
+    readonly_fields = [
+        "date_password_last_updated",
+        "date_api_key_last_used",
+    ]
     search_fields = ["name"]
     ordering = ["id"]
     add_fieldsets = (
