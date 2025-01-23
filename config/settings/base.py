@@ -89,11 +89,18 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "drf_spectacular",
+    "oauth2_provider",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
+    # ...
+    "allauth.socialaccount.providers.facebook",
 ]
 
 LOCAL_APPS = [
     "quizify.users",
     # Your stuff: custom apps go here
+    "quizify.authentication",
+    "quizify.common",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -107,7 +114,6 @@ MIGRATION_MODULES = {"sites": "quizify.contrib.sites.migrations"}
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#authentication-backends
 AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
@@ -330,12 +336,16 @@ ACCOUNT_FORMS = {"signup": "quizify.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "quizify.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_FORMS = {"signup": "quizify.users.forms.UserSocialSignupForm"}
+GITHUB_CALLBACK_URL = ""
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
+        "quizify.authentication.backend.AccessTokenAuthentication",
+        # "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
     ),
@@ -352,8 +362,32 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "quizify API",
     "DESCRIPTION": "Documentation of API endpoints of quizify",
     "VERSION": "1.0.0",
-    "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
+    "SERVE_PERMISSIONS": ["rest_framework.permissions.AllowAny"],
     "SCHEMA_PATH_PREFIX": "/api/",
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+CACHE_LOGIN_PASSWORD_ENABLED = False
+
+SECURITY_LOGIN_LIMIT_COUNT = 20
+SECURITY_LOGIN_LIMIT_TIME = 30
+SECURITY_LOGIN_IP_BLACK_LIST = []
+SECURITY_LOGIN_IP_WHITE_LIST = []
+SECURITY_LOGIN_IP_LIMIT_COUNT = 99999
+SECURITY_LOGIN_IP_LIMIT_TIME = 30
+
+ONLY_ALLOW_EXIST_USER_AUTH = False
+
+SECURITY_PASSWORD_EXPIRATION_TIME = 9999
+
+TOKEN_EXPIRATION = 3600 * 24
+DEFAULT_EXPIRED_YEARS = 70
+
+
+# dj-rest-auth https://github.com/iMerica/dj-rest-auth
+REST_AUTH = {
+    "USE_JWT": True,
+    "JWT_AUTH_COOKIE": "quizify-auth",
+    "JWT_AUTH_REFRESH_COOKIE": "quizify-refresh-token",
+}
