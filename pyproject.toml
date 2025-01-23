@@ -134,5 +134,5 @@ extend-unsafe-fixes = [
     "UP038",
 ]
 
-[tool.ruff.lint.isort]
+[tool.ruff.isort]
 force-single-line = true
