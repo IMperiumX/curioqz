@@ -1,17 +1,16 @@
-import contextlib
 import datetime
 import logging
 from collections.abc import Callable
 from functools import partial
 
 from django.conf import settings
+from django.contrib.auth import authenticate
 from django.core.cache import cache
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from rest_framework.request import Request
 
 from quizify.common.utils import bulk_get
-from quizify.common.utils import get_object_or_none
 from quizify.common.utils import get_request_ip
 from quizify.users.signals import post_user_change_password
 from quizify.users.utils import LoginBlockUtil
@@ -135,18 +134,17 @@ class AuthMixin(CommonMixin, AuthPreCheckMixin, AuthPostCheckMixin):
             if self.email:
                 self.date_password_last_updated = timezone.now()
                 post_user_change_password.send(self.__class__, user=self)
-            super().set_password(raw_password)  # noqa
+            super().set_password(raw_password)
 
     def check_user_auth(self, valid_data=None):
-        from quizify.users.models import User
-
         # pre check
         self.check_is_block()
         email, password, ip = self.get_auth_data(valid_data)
         self._check_only_allow_exists_user_auth(email)
 
         # check auth
-        user = get_object_or_none(User, email=email)
+        user = authenticate(self.request, **valid_data)
+
         if not user:
             self.raise_credential_error(errors.reason_password_failed)
 
