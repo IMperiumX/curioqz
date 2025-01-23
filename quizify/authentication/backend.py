@@ -12,7 +12,7 @@ from quizify.common.utils.django import get_object_or_none
 
 class TokenScheme(OpenApiAuthenticationExtension):
     target_class = "quizify.authentication.backend.AccessTokenAuthentication"
-    name = "Access Token"
+    name = "Access Token (redis)"
     match_subclasses = True
     priority = -1
 
@@ -43,7 +43,7 @@ class AccessTokenAuthentication(authentication.BaseAuthentication):
             token = auth[1].decode()
         except UnicodeError:
             msg = _(
-                "Invalid token header. Sign string should not contain invalid characters."
+                "Invalid token header. Sign string should not contain invalid characters.",
             )
             raise exceptions.AuthenticationFailed(msg) from None
         user, header = self.authenticate_credentials(token)
